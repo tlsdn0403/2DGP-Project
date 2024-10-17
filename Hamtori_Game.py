@@ -1,8 +1,40 @@
 from pico2d import *
 open_canvas()
+
 running=False
+
+
+y=600//2
+x=800//2
+frame=0
+dirx=0
+diry=0
+
+
 ###################################클래스들##############################
 class Hamtori:
+    def moving_left():
+        pass
+    def moving_right():
+        pass
+    def moving_up():
+        pass
+    def moving_down():
+        pass
+    def idle():
+        pass
+    def running_left():
+        pass
+    def running_right():
+        pass
+    def running_up():
+        pass
+    def running_down():
+        pass
+
+class enemy_1:
+    pass
+class enemy_2:
     pass
 class Background:
     pass
