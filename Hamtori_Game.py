@@ -15,13 +15,14 @@ class Hamtori_Image:
     ham_up = 'Hams_Walking_Up.png'
     ham_down = 'Hams_Walking_Down.png'
     ham_left_right = 'Hams_walking_left_right.png'
+    ham_idle='Hams_idle1.png'
 
 class Hamtori:
     def __init__(self):
-        self.x, self.y = 20, 20  # 화면 왼아래에서 시작
+        self.x, self.y = 200, 200  # 화면 왼아래에서 시작
         self.frame = 0
-        self.ham_image_judge = 1  # 초기 이미지 설정
-        self.ham_image = load_image(Hamtori_Image.ham_left_right)  # 기본 이미지를 오른쪽 이동 이미지로 설정
+        self.ham_image_judge = 0  # 초기 이미지 설정
+        self.ham_image = load_image(Hamtori_Image.ham_idle)  # 기본 이미지
 
     def update(self):
         self.frame = (self.frame + 1) % 4  # 애니메이션 프레임 업데이트
@@ -40,6 +41,9 @@ class Hamtori:
         elif self.ham_image_judge == 4:  # 우 이동
             self.ham_image = load_image(Hamtori_Image.ham_left_right)
             self.ham_image.clip_draw(144+self.frame * 37, 0, 37, 40, self.x, self.y)
+        elif self.ham_image_judge==0:
+            self.ham_image=load_image(Hamtori_Image.ham_idle)
+            self.ham_image.clip_draw(self.frame * 38, 0, 38, 40, self.x, self.y)
         
        
 
@@ -60,6 +64,8 @@ class Hamtori:
     def move_down(self):
         self.ham_image_judge = 2  # 아래로 이동하는 이미지로 설정
         self.y -= 5  # 아래로 이동
+    def idle(self):
+        self.ham_image_judge=0
 
 #################################### 함수들 ##############################
 def handle_events():
@@ -95,6 +101,8 @@ def update_world():
         hamtori.move_up()
     elif diry == -1:
         hamtori.move_down()
+    elif dirx==0 and diry==0:
+        hamtori.idle()
     
     hamtori.update()  # 애니메이션 프레임 업데이트
 
