@@ -86,12 +86,19 @@ class Walls:
     def __init__(self):
         self.walls_image = load_image(walls_image.stage_1_walls)
         # 벽의 위치들을 리스트로 저장
-        self.positions = [
-            (400, 300),
-            (20, 20),
-            (60, 20),
-            (100, 20),  # 추가하고 싶은 좌표를 계속 추가
-        ]
+        self.positions =[]
+        for x in range(20, 800, 40): ##아래
+            self.positions.append((x, 20))
+        
+
+        for y in range(60, 600, 40): ##오른쪽
+            self.positions.append((780, y))
+
+        for y in range(60, 600, 40): ##왼쪽
+            self.positions.append((20, y))
+
+        for x in range(20, 660, 40): ##위
+            self.positions.append((x, 580))
 
     def draw(self):
         # 위치 리스트에 있는 각 좌표에 벽을 그림
