@@ -10,3 +10,6 @@ class Background:
 
     def draw(self):
         self.background_image.draw(self.x, self.y, 800, 600)  # 배경을 화면에 그림
+
+    def update(self):
+        pass

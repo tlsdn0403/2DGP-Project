@@ -6,6 +6,5 @@ import Hamtori_Game as start_mode
 
 
 # game loop13
-open_canvas() 
 game_framework.run(start_mode)
 close_canvas()
