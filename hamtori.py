@@ -93,29 +93,20 @@ class Hamtori:
         pass
 
     def draw(self):
-        self.state_machine.draw()
-        # 방향에 따라 이미지를 선택
+        self.state_machine.draw()# 방향에 따라 이미지를 선택
+        draw_rectangle(*self.get_bb())
+        
          
 
-    def move_left(self, walls):
-        if not walls.check_collision(self.x - 5, self.y):  # 왼쪽으로 이동 전 충돌 검사
-            self.ham_image_judge = 3  # 왼쪽으로 이동하는 이미지로 설정
-            self.x -= 5  # 왼쪽으로 이동
+    def get_bb(self):
+        return self.x -20, self.y-20, self.x +20, self.y+20
+        pass
 
-    def move_right(self, walls):
-        if not walls.check_collision(self.x + 5, self.y):  # 오른쪽으로 이동 전 충돌 검사
-            self.ham_image_judge = 4  # 오른쪽으로 이동하는 이미지로 설정
-            self.x += 5  # 오른쪽으로 이동
 
-    def move_up(self, walls):
-        if not walls.check_collision(self.x, self.y + 5):  # 위로 이동 전 충돌 검사
-            self.ham_image_judge = 1  # 위로 이동하는 이미지로 설정
-            self.y += 5  # 위로 이동
-
-    def move_down(self, walls):
-        if not walls.check_collision(self.x, self.y - 5):  # 아래로 이동 전 충돌 검사
-            self.ham_image_judge = 2  # 아래로 이동하는 이미지로 설정
-            self.y -= 5  # 아래로 이동
-
-    def idle(self):
-        self.ham_image_judge = 0
+    def handle_collision(self, group, other):
+        # fill here
+        if group == 'hamtori:wall':
+            print("collid")
+        if group == 'boy:zombie':
+            game_framework.quit()
+        pass
