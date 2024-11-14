@@ -55,8 +55,11 @@ def init():
         # Hamtori와 각 WallSegment의 충돌 페어 추가
         game_world.add_collision_pair('hamtori:wall', None, wall)
 
-
-    obstacle = [Walls(x, y) for (x, y) in wall_positions]
+    obstacle_positions = []
+    obstacle_positions.append((50,50))
+    obstacles = [Obstacle(x, y) for (x, y) in obstacle_positions]
+    for obstacle in obstacles:
+        game_world.add_object(obstacle, 1)
 
 
 

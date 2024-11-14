@@ -8,4 +8,11 @@ class Obstacle:
         self.x = x
         self.y = y
         self.image = load_image(obstacle_image.stage_1)
+
+    def draw(self):
+        self.image.draw(self.x, self.y,40,40)
         
+
+    def update(self):
+        pass
+
