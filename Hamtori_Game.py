@@ -2,6 +2,7 @@ from pico2d import *
 from Background import Background
 from Walls import Walls
 from hamtori import Hamtori
+from obstacle import Obstacle
 import game_framework
 import game_world
 
@@ -31,6 +32,7 @@ def init():
     game_world.add_object(hamtori,1)
     background = Background()  # 배경 객체 생성
     game_world.add_object(background,0)
+    
 
     wall_positions = []
     for x in range(20, 800, 40):  # Bottom
@@ -52,6 +54,11 @@ def init():
         game_world.add_object(wall, 1)
         # Hamtori와 각 WallSegment의 충돌 페어 추가
         game_world.add_collision_pair('hamtori:wall', None, wall)
+
+
+    obstacle = [Walls(x, y) for (x, y) in wall_positions]
+
+
 
 
    

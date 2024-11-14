@@ -14,5 +14,6 @@ class walls_image:
 
 class Backgorund_image:
     stage_1 = 'ham_background.jpg'
-class walls_image:
-    stage_1_walls = 'greenwall.jpg'
+
+class obstacle_image:
+    stage_1= 'wood_obstacle_1'
