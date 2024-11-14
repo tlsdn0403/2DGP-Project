@@ -56,7 +56,7 @@ def init():
         game_world.add_collision_pair('hamtori:wall', None, wall)
 
     obstacle_positions = []
-    obstacle_positions.append((50,50))
+    obstacle_positions.append((250,250))
     obstacles = [Obstacle(x, y) for (x, y) in obstacle_positions]
     for obstacle in obstacles:
         game_world.add_object(obstacle, 1)
