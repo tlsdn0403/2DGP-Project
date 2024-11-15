@@ -69,7 +69,8 @@ class Run:
 
 class Hamtori:
     def __init__(self):
-        self.x, self.y = 200, 200  # 화면 왼아래에서 시작
+        self.hp=3
+        self.x, self.y = 65, 65  # 화면 왼아래에서 시작
         self.frame = 0
         self.dirx=0
         self.diry=0
@@ -99,14 +100,31 @@ class Hamtori:
          
 
     def get_bb(self):
-        return self.x -20, self.y-20, self.x +20, self.y+20
+        return self.x -18, self.y-20, self.x +18, self.y+18
         pass
 
 
     def handle_collision(self, group, other):
-        # fill here
         if group == 'hamtori:wall':
-            print("collid")
-        if group == 'boy:zombie':
-            game_framework.quit()
-        pass
+            if self.dirx > 0 and self.x <= other.x: 
+                self.x -= self.dirx * RUN_SPEED_PPS * game_framework.frame_time
+                self.dirx = 0
+                
+            elif self.dirx < 0 and self.x >= other.x: 
+                self.x -= self.dirx * RUN_SPEED_PPS * game_framework.frame_time
+                self.dirx = 0
+
+            elif self.diry > 0 and self.y <= other.y:
+                self.y -= self.diry * RUN_SPEED_PPS * game_framework.frame_time 
+                self.diry = 0
+
+            elif self.diry < 0 and self.y >= other.y:  
+                self.y -= self.diry * RUN_SPEED_PPS * game_framework.frame_time 
+                self.diry = 0
+
+
+            print("Hamtori collided with a wall.")
+        if group == 'hamtori:obstacle':
+            self.x=65
+            self.y=65
+            print("Hamtori collided with a obs.")

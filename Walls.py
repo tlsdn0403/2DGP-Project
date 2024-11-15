@@ -30,6 +30,4 @@ class Walls:
         # fill here
         if group == 'hamtori:wall':
             print("collid")
-        if group == 'boy:zombie':
-            game_framework.quit()
         pass
