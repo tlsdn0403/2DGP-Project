@@ -40,7 +40,6 @@ class Obstacle:
 
     def update(self):
         self.do()
-        self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % FRAMES_PER_ACTION
         self.x += RUN_SPEED_PPS * self.dir * game_framework.frame_time
         if self.x > 750:
             self.dir = -1

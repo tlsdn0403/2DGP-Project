@@ -5,7 +5,7 @@ from hamtori import Hamtori
 from obstacle import Obstacle
 import game_framework
 import game_world
-import Stage_2
+import Stage_3
 
 def handle_events():
     events = get_events()
@@ -15,7 +15,7 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.quit()
         elif hamtori.x>=600 and hamtori.y>=600:
-            game_framework.change_mode(Stage_2) 
+            game_framework.change_mode(Stage_3) 
         else:
             hamtori.handle_event(event)
         
@@ -24,7 +24,7 @@ def init():
     global hamtori, background, walls
     hamtori = Hamtori()  # 햄토리 객체 생성
     game_world.add_object(hamtori,1)
-    background = Background(1)  # 배경 객체 생성
+    background = Background(2)  # 배경 객체 생성
     game_world.add_object(background,0)
     
 
@@ -50,7 +50,7 @@ def init():
         wall_positions.append((x, 580))
     
     # WallSegment 객체 리스트로 관리
-    walls = [Walls(x, y,stage=1) for (x, y) in wall_positions]
+    walls = [Walls(x, y,stage=2) for (x, y) in wall_positions]
 
 
     game_world.add_collision_pair('hamtori:wall',hamtori, None)  #햄토리를 한 번만 넣도록 만듦

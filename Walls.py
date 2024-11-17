@@ -10,10 +10,14 @@ RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
 class Walls:
-    def __init__(self, x, y):
+    def __init__(self, x, y,stage):
+        self.stage= stage
         self.x = x
         self.y = y
-        self.walls_image = load_image(walls_image.stage_1_walls)
+        if stage==1:
+            self.walls_image = load_image(walls_image.stage_1_walls)
+        elif stage==2:
+            self.walls_image = load_image(walls_image.stage_2_walls)
 
     def draw(self):
         self.walls_image.draw(self.x, self.y,40,40)

@@ -9,6 +9,7 @@ def change_mode(mode):
         # remove the current mode
         stack.pop()
     stack.append(mode)
+    print("mode changed")
     mode.init()
 
 
