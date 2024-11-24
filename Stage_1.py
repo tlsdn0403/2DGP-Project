@@ -79,6 +79,7 @@ def init():
 
 def finish():
     game_world.clear()
+    game_world.clear_collision_pairs()
     pass
 
 def update():

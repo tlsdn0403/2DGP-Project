@@ -76,3 +76,9 @@ def handle_collisions():
                     a.handle_collision(group,b)
                     b.handle_collision(group,a)
     return None 
+
+
+def clear_collision_pairs():
+    """충돌 페어를 모두 제거"""
+    global collision_pairs
+    collision_pairs.clear()
