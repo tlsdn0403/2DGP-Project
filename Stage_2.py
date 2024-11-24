@@ -34,15 +34,6 @@ def init():
     for y in range(60, 600, 40):  # Right
         wall_positions.append((780, y))
 
-    for x in range(60, 360, 40):  # Middle_left
-        wall_positions.append((x, 300))
-    for x in range(60, 360, 40):  # Middle_left
-        wall_positions.append((x, 340))
-
-    for x in range(460, 780, 40):  # Middle_Right
-        wall_positions.append((x, 300))
-    for x in range(460, 780, 40):  # Middle_Right
-        wall_positions.append((x, 340))
 
     for y in range(60, 600, 40):  # Left
         wall_positions.append((20, y))
@@ -79,6 +70,7 @@ def init():
 
 def finish():
     game_world.clear()
+    game_world.clear_collision_pairs()
     pass
 
 def update():
