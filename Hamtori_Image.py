@@ -19,3 +19,6 @@ class Backgorund_image:
 
 class obstacle_image:
     stage_1= 'stone_2.png'
+
+class boss_image:
+    stage_2 ='boss.png'

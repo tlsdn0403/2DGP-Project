@@ -3,6 +3,7 @@ from Background import Background
 from Walls import Walls
 from hamtori import Hamtori
 from obstacle import Obstacle
+from zombie import Boss
 import game_framework
 import game_world
 import Stage_3
@@ -63,6 +64,15 @@ def init():
     for obstacle in obstacles:
         game_world.add_object(obstacle, 1)
         game_world.add_collision_pair('hamtori:obstacle',None, obstacle)  #햄토리를 한 번만 넣도록 만듦
+
+    boss_positions = []
+    boss_positions.append((100,200))
+    Enemys=[Boss(x,y) for (x,y) in boss_positions ]
+    game_world.add_collision_pair('hamtori:boss',hamtori,None)
+    for Enemy in Enemys:
+        game_world.add_object(Enemy ,1)
+        game_world.add_collision_pair ('hamtori:boss',None,Enemy)
+    
 
     
     
