@@ -3,7 +3,7 @@ from Background import Background
 from Walls import Walls
 from hamtori import Hamtori
 from obstacle import Obstacle
-from zombie import Boss
+from boss import Boss
 import game_framework
 import game_world
 import Stage_3
