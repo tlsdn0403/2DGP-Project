@@ -18,6 +18,8 @@ class Walls:
             self.walls_image = load_image(walls_image.stage_1_walls)
         elif stage==2:
             self.walls_image = load_image(walls_image.stage_2_walls)
+        elif stage==3:
+            self.walls_image = load_image(walls_image.stage_3_walls)
 
     def draw(self):
         self.walls_image.draw(self.x, self.y,40,40)

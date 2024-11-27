@@ -12,6 +12,7 @@ class Hamtori_Image:
 class walls_image:
     stage_1_walls = 'greenwall.jpg'
     stage_2_walls = 'blackwall.jpg'
+    stage_3_walls= 'redwall.jpg'
 
 class Backgorund_image:
     stage_1 = 'ham_background.jpg'

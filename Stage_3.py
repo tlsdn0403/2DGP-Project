@@ -50,7 +50,7 @@ def init():
         wall_positions.append((x, 580))
     
     # WallSegment 객체 리스트로 관리
-    walls = [Walls(x, y,stage=2) for (x, y) in wall_positions]
+    walls = [Walls(x, y,stage=3) for (x, y) in wall_positions]
 
 
     game_world.add_collision_pair('hamtori:wall',hamtori, None)  #햄토리를 한 번만 넣도록 만듦
