@@ -22,7 +22,7 @@ def handle_events():
 
 def init():
     global hamtori, background, walls
-    hamtori = Hamtori()  # 햄토리 객체 생성
+    hamtori = Hamtori(720,65)  # 햄토리 객체 생성
     game_world.add_object(hamtori,1)
     background = Background(2)  # 배경 객체 생성
     game_world.add_object(background,0)

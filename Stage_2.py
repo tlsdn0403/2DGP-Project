@@ -23,7 +23,7 @@ def handle_events():
 
 def init():
     global hamtori, background, walls
-    hamtori = Hamtori()  # 햄토리 객체 생성
+    hamtori = Hamtori(720,70)  # 햄토리 객체 생성
     game_world.add_object(hamtori,1)
     background = Background(2)  # 배경 객체 생성
     game_world.add_object(background,0)
@@ -32,15 +32,28 @@ def init():
     wall_positions = []
     for x in range(20, 800, 40):  # Bottom
         wall_positions.append((x, 20))
+    for x in range(110, 760, 40):  # middle
+        wall_positions.append((x, 300))
+    
+
     for y in range(60, 600, 40):  # Right
         wall_positions.append((780, y))
+
+    for y in range(60, 220, 40):  # middle
+        wall_positions.append((400, y))
+    for y in range(340, 500, 40):  # middle
+        wall_positions.append((400, y))
+
+    
 
 
     for y in range(60, 600, 40):  # Left
         wall_positions.append((20, y))
     for x in range(20, 660, 40):  # Top
         wall_positions.append((x, 580))
-    
+
+
+
     # WallSegment 객체 리스트로 관리
     walls = [Walls(x, y,stage=2) for (x, y) in wall_positions]
 
@@ -52,26 +65,23 @@ def init():
         # Hamtori와 각 WallSegment의 충돌 페어 추가
         game_world.add_collision_pair('hamtori:wall', None, wall)
 
-    obstacle_positions = []
-    obstacle_positions.append((70,240))
-    obstacle_positions.append((720,160))
-
-    obstacle_positions.append((70,400))
-    obstacle_positions.append((720,520))
-
-    obstacles = [Obstacle(x, y) for (x, y) in obstacle_positions]
-    game_world.add_collision_pair('hamtori:obstacle',hamtori, None)  #햄토리를 한 번만 넣도록 만듦
-    for obstacle in obstacles:
-        game_world.add_object(obstacle, 1)
-        game_world.add_collision_pair('hamtori:obstacle',None, obstacle)  #햄토리를 한 번만 넣도록 만듦
+   
 
     boss_positions = []
-    boss_positions.append((100,200))
+    boss_positions.append((200,200))
+    boss_positions.append((420,240))
+    boss_positions.append((200,400))
+    boss_positions.append((420,400))
     Enemys=[Boss(x,y) for (x,y) in boss_positions ]
     game_world.add_collision_pair('hamtori:boss',hamtori,None)
     for Enemy in Enemys:
         game_world.add_object(Enemy ,1)
         game_world.add_collision_pair ('hamtori:boss',None,Enemy)
+
+    for Enemy in Enemys:
+        game_world.add_collision_pair ('boss:walls',Enemy,None)
+    for wall in walls:
+        game_world.add_collision_pair ('boss:walls',None,wall)
     
 
     

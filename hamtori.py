@@ -15,6 +15,8 @@ TIME_PER_ACTION = 0.5
 ACTION_PER_TIME = 1 / TIME_PER_ACTION
 FRAMES_PER_ACTION = 4
 
+
+
 class Idle:
     def enter(self, e):
         if start_event(e):
@@ -31,59 +33,188 @@ class Idle:
         pass
 
 
-class Run:
+class RunUp:
     @staticmethod
     def enter(self, e):
-        if right_down(e): # 오른쪽으로 RUN
-            self.ham_image_judge, self.dirx,self.diry = 4, +1,0
-        elif left_down(e): # 왼쪽으로 RUN           
-            self.ham_image_judge,self.dirx,self.diry=3,-1,0
-        elif down_down(e):
-            self.ham_image_judge, self.diry,self.dirx = 2, -1,0
-        elif up_down(e):  
-            self.ham_image_judge, self.diry,self.dirx = 1, +1,0
-    def exit(hamtori,e):
-        pass
-    def do(self):
-        self.frame = (self.frame + FRAMES_PER_ACTION*ACTION_PER_TIME*game_framework.frame_time) % 4
-        self.x += self.dirx * RUN_SPEED_PPS * game_framework.frame_time
-        self.y += self.diry * RUN_SPEED_PPS * game_framework.frame_time
-        
-    def draw(self):
-        if self.ham_image_judge == 1:  # 위로 이동
-            self.ham_image = Hamtori_Image.ham_up
-            self.ham_image.clip_draw(int(self.frame) * 37, 0, 37, 40, self.x, self.y)
-        elif self.ham_image_judge == 2:  # 아래로 이동
-            self.ham_image = Hamtori_Image.ham_down
-            self.ham_image.clip_draw(int(self.frame) * 40, 0, 40, 40, self.x, self.y)
-        elif self.ham_image_judge == 3:  # 좌 이동
-            self.ham_image = Hamtori_Image.ham_left_right
-            self.ham_image.clip_draw(int(self.frame) * 37 - 3, 0, 37, 40, self.x, self.y)
-        elif self.ham_image_judge == 4:  # 우 이동
-            self.ham_image = Hamtori_Image.ham_left_right
-            self.ham_image.clip_draw(144 + int(self.frame) * 37, 0, 37, 40, self.x, self.y)
-        elif self.ham_image_judge == 0:
-            self.ham_image = Hamtori_Image.ham_idle
-            self.ham_image.clip_draw(int(self.frame) * 38, 0, 38, 40, self.x, self.y)
+        self.ham_image_judge, self.diry, self.dirx = 1, +1, 0
 
+    @staticmethod
+    def exit(self, e):
+        pass
+
+    def do(self):
+        self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 4
+        self.y += self.diry * RUN_SPEED_PPS * game_framework.frame_time
+
+    def draw(self):
+        self.ham_image = Hamtori_Image.ham_up
+        self.ham_image.clip_draw(int(self.frame) * 37, 0, 37, 40, self.x, self.y)
+
+
+class RunDown:
+    @staticmethod
+    def enter(self, e):
+        self.ham_image_judge, self.diry, self.dirx = 2, -1, 0
+
+    @staticmethod
+    def exit(self, e):
+        pass
+
+    def do(self):
+        self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 4
+        self.y += self.diry * RUN_SPEED_PPS * game_framework.frame_time
+
+    def draw(self):
+        self.ham_image = Hamtori_Image.ham_down
+        self.ham_image.clip_draw(int(self.frame) * 40, 0, 40, 40, self.x, self.y)
+
+
+class RunLeft:
+    @staticmethod
+    def enter(self, e):
+        self.ham_image_judge, self.dirx, self.diry = 3, -1, 0
+
+    @staticmethod
+    def exit(self, e):
+        pass
+
+    def do(self):
+        self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 4
+        self.x += self.dirx * RUN_SPEED_PPS * game_framework.frame_time
+
+    def draw(self):
+        self.ham_image = Hamtori_Image.ham_left_right
+        self.ham_image.clip_draw(int(self.frame) * 37 - 3, 0, 37, 40, self.x, self.y)
+
+
+class RunRight:
+    @staticmethod
+    def enter(self, e):
+        self.ham_image_judge, self.dirx, self.diry = 4, +1, 0
+
+    @staticmethod
+    def exit(self, e):
+        pass
+
+    def do(self):
+        self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 4
+        self.x += self.dirx * RUN_SPEED_PPS * game_framework.frame_time
+
+    def draw(self):
+        self.ham_image = Hamtori_Image.ham_left_right
+        self.ham_image.clip_draw(144 + int(self.frame) * 37, 0, 37, 40, self.x, self.y)
+
+class RunRightUp:
+    @staticmethod
+    def enter(self, e):
+        self.action = 1
+        self.speed = RUN_SPEED_PPS
+        self.dir = math.pi / 4.0
+
+    @staticmethod
+    def exit(self, e):
+        pass
+
+    @staticmethod
+    def do(self):
+        self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 4
+        self.x += math.cos(self.dir) * RUN_SPEED_PPS * game_framework.frame_time
+        self.y += math.sin(self.dir) * RUN_SPEED_PPS * game_framework.frame_time
+    def draw(self):
+        self.ham_image = Hamtori_Image.ham_left_right
+        self.ham_image.clip_draw(144 + int(self.frame) * 37, 0, 37, 40, self.x, self.y)
+
+class RunRightDown:
+    @staticmethod
+    def enter(self, e):
+        self.action = 1
+        self.speed = RUN_SPEED_PPS
+        self.dir = -math.pi / 4.0
+
+    @staticmethod
+    def exit(boy, e):
+        pass
+
+    @staticmethod
+    def do(self):
+        self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 4
+        self.x += math.cos(self.dir) * RUN_SPEED_PPS * game_framework.frame_time
+        self.y += math.sin(self.dir) * RUN_SPEED_PPS * game_framework.frame_time
+    def draw(self):
+        self.ham_image = Hamtori_Image.ham_left_right
+        self.ham_image.clip_draw(144 + int(self.frame) * 37, 0, 37, 40, self.x, self.y)
+
+class RunLeftUp:
+    @staticmethod
+    def enter(self, e):
+        self.action = 0
+        self.speed = RUN_SPEED_PPS
+        self.dir = math.pi * 3.0 / 4.0
+
+    @staticmethod
+    def exit(self, e):
+        pass
+
+    @staticmethod
+    def do(self):
+        self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 4
+        self.x += math.cos(self.dir) * RUN_SPEED_PPS * game_framework.frame_time
+        self.y += math.sin(self.dir) * RUN_SPEED_PPS * game_framework.frame_time
+    def draw(self):
+        self.ham_image = Hamtori_Image.ham_left_right
+        self.ham_image.clip_draw(int(self.frame) * 37 - 3, 0, 37, 40, self.x, self.y)
+
+
+class RunLeftDown:
+    @staticmethod
+    def enter(boy, e):
+        boy.action = 0
+        boy.speed = RUN_SPEED_PPS
+        boy.dir = - math.pi * 3.0 / 4.0
+
+    @staticmethod
+    def exit(boy, e):
+        pass
+
+    @staticmethod
+    def do(self):
+        self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 4
+        self.x += math.cos(self.dir) * RUN_SPEED_PPS * game_framework.frame_time
+        self.y += math.sin(self.dir) * RUN_SPEED_PPS * game_framework.frame_time
+
+    def draw(self):
+        self.ham_image = Hamtori_Image.ham_left_right
+        self.ham_image.clip_draw(int(self.frame) * 37 - 3, 0, 37, 40, self.x, self.y)
 
 class Hamtori:
-    def __init__(self):
+    def __init__(self,x,y):
         self.hp=3
-        self.x, self.y = 65, 65  # 화면 왼아래에서 시작
+        self.x, self.y = x, y  # 화면 왼아래에서 시작
         self.frame = 0
         self.dirx=0
         self.diry=0
         self.ham_image_judge = 0  # 초기 이미지 설정
         self.ham_image = Hamtori_Image.ham_idle  # 기본 이미지
         self.state_machine = StateMachine(self)
-        self.state_machine.start(Run)
+        self.state_machine.start(Idle)
         self.state_machine.set_transitions(
-            {
-                Idle: {right_down: Run, left_down: Run, left_up: Run, right_up: Run,down_up:Run, down_down:Run, up_down:Run , up_up:Run , space_down: Idle},
-                Run: {right_down: Run, left_down: Run, right_up: Idle, left_up: Idle,down_up:Idle, down_down:Run, up_down:Run , up_up:Idle , space_down: Idle}
-            }
-        )
+    {
+        Idle: {right_down: RunRight, left_down: RunLeft, left_up: RunRight, right_up: RunLeft, upkey_down: RunUp,
+                   downkey_down: RunDown, downkey_up: RunUp},
+            RunRight: {right_up: Idle, left_down: Idle, upkey_down: RunRightUp, upkey_up: RunRightDown,
+                       downkey_down: RunRightDown, downkey_up: RunRightUp},
+            RunRightUp: {upkey_up: RunRight, right_up: RunUp, left_down: RunUp, downkey_down: RunRight},
+            RunUp: {upkey_up: Idle, left_down: RunLeftUp, downkey_down: Idle, right_down: RunRightUp,
+                    left_up: RunRightUp, right_up: RunLeftUp},
+            RunLeftUp: {right_down: RunUp, downkey_down: RunLeft, left_up: RunUp, upkey_up: RunLeft},
+            RunLeft: {left_up: Idle, upkey_down: RunLeftUp, right_down: Idle, downkey_down: RunLeftDown,
+                      upkey_up: RunLeftDown, downkey_up: RunLeftUp},
+            RunLeftDown: {left_up: RunDown, downkey_up: RunLeft, upkey_down: RunLeft, right_down: RunDown},
+            RunDown: {downkey_up: Idle, left_down: RunLeftDown, upkey_down: Idle, right_down: RunRightDown,
+                      left_up: RunRightDown, right_up: RunLeftDown},
+            RunRightDown: {right_up: RunDown, downkey_up: RunRight, left_down: RunDown, upkey_down: RunRight}
+    }
+)
 
     def update(self):
         self.state_machine.update()
@@ -121,6 +252,10 @@ class Hamtori:
             elif self.diry < 0 and self.y >= other.y:  
                 self.y -= self.diry * RUN_SPEED_PPS * game_framework.frame_time 
                 self.diry = 0
+            else:
+                self.x -= math.cos(self.dir) * RUN_SPEED_PPS * game_framework.frame_time
+                self.y -= math.sin(self.dir) * RUN_SPEED_PPS * game_framework.frame_time
+                print("collid")
 
 
             print("Hamtori collided with a wall.")
@@ -128,3 +263,9 @@ class Hamtori:
             self.x=65
             self.y=65
             print("Hamtori collided with a obs.")
+
+        if group == 'hamtori:boss':
+            self.x=720
+            self.y=65
+            print("Hamtori collided with a boss.")
+        

@@ -1,7 +1,7 @@
 import game_framework
 from pico2d import*
 #타이틀 모드를 import 하되, 이름을 바꿔친다
-import Stage_2 as start_mode
+import Stage_1 as start_mode
 
 
 
