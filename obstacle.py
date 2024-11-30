@@ -32,7 +32,7 @@ class Obstacle:
 
     def draw(self):
         self.image.clip_draw(int(self.frame) * 96, 0, 96, 96, self.x, self.y)
-        draw_rectangle(*self.get_bb())
+        #draw_rectangle(*self.get_bb())
 
     def get_bb(self):
         return self.x -40, self.y -40,self.x +40, self.y +40

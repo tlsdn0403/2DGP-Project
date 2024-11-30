@@ -23,7 +23,7 @@ class Walls:
 
     def draw(self):
         self.walls_image.draw(self.x, self.y,40,40)
-        draw_rectangle(*self.get_bb())
+        #draw_rectangle(*self.get_bb())
 
     def get_bb(self):
        return self.x -20, self.y -20,self.x +20, self.y +20

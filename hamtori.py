@@ -226,7 +226,7 @@ class Hamtori:
 
     def draw(self):
         self.state_machine.draw()# 방향에 따라 이미지를 선택
-        draw_rectangle(*self.get_bb())
+        #draw_rectangle(*self.get_bb())
         
          
 

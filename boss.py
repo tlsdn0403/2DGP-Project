@@ -68,7 +68,7 @@ class Boss:
             self.image.clip_draw(int(self.frame) * 28, 30, 26, 30, self.x, self.y)
         else:
             self.image.clip_draw(int(self.frame) * 28, 0, 26, 30, self.x, self.y)
-        draw_rectangle(*self.get_bb())
+        #draw_rectangle(*self.get_bb())
 
     def handle_event(self, event):
         pass
