@@ -197,6 +197,11 @@ class Hamtori:
         self.ham_image = Hamtori_Image.ham_idle  # 기본 이미지
         self.state_machine = StateMachine(self)
         self.state_machine.start(Idle)
+
+        self.collision_sound = load_wav('ham_get_pain.wav')
+        self.collision_sound.set_volume(32)
+
+        
         self.state_machine.set_transitions(
     {
         Idle: {right_down: RunRight, left_down: RunLeft, left_up: RunRight, right_up: RunLeft, upkey_down: RunUp,
@@ -260,12 +265,16 @@ class Hamtori:
 
             print("Hamtori collided with a wall.")
         if group == 'hamtori:obstacle':
-            self.x=65
-            self.y=65
-            print("Hamtori collided with a obs.")
+            self.x = 65
+            self.y = 65
+            if self.collision_sound:
+                self.collision_sound.play()  # 충돌 효과음을 재생
+            print("Hamtori collided with an obstacle, sound played.")
 
         if group == 'hamtori:boss':
-            self.x=720
-            self.y=65
+            self.x = 720
+            self.y = 65
+            if self.collision_sound:
+                self.collision_sound.play()  # 충돌 효과음을 재생
             print("Hamtori collided with a boss.")
         

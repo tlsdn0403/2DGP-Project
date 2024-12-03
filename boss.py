@@ -158,7 +158,7 @@ class Boss:
         a2 = Action('랜덤 위치', self.set_random_location)
         SEQ_wander = Sequence('Wander', a2, a1)
 
-        c1 = Condition('소년이 근처에 있는가?', self.is_ham_nearby, 4)
+        c1 = Condition('햄토리가 근처에 있는가?', self.is_ham_nearby, 4)
         a3= Action('햄토리로 이동', self.move_to_ham)
         SEQ_chace= Sequence('chace', c1, a3)
         root = SEQ_chase_or_wander= Selector('추적 혹은 배회',SEQ_chace, SEQ_wander)
