@@ -1,14 +1,15 @@
 from pico2d import *
 import random
-from Hamtori_Image import boss_image
+from Hamtori_Image import *
 import math
-from Hamtori_Image import Hamtori_Image
 from pico2d import *
 from state_machine import *
 import game_world
 import game_framework
 import Stage_2
+import Stage_3
 from Walls import*
+from hamtori import*
 import behavior_tree
 from behavior_tree import BehaviorTree, Action, Sequence, Condition, Selector
 
@@ -32,9 +33,10 @@ class Boss:
     images = None
 
 
-    def __init__(self, x, y):
+    def __init__(self, x, y,stage):
         self.x = x
         self.y = y
+        self.stage=stage
         self.image = load_image(boss_image.stage_2)
         self.dir = 0.0  # radian 값으로 방향을 표시
         self.dirx=0
@@ -46,15 +48,22 @@ class Boss:
         self.tx, self.ty = 0, 0
         self.build_behavior_tree()
         self.state='Idle'
-
-        if x>400 and y>300:
-            self.num=4
-        elif x<400 and y>300:
-            self.num=3
-        elif x<400 and y<300:
-            self.num=2
-        elif x>400 and y<300:
-            self.num=1
+        if stage==3:
+            if self.x<200:
+                self.num=5
+            elif self.x>600:
+                self.num=6
+            else:
+                self.num=7
+        else:
+            if x>400 and y>300:
+                self.num=4
+            elif x<400 and y>300:
+                self.num=3
+            elif x<400 and y<300:
+                self.num=2
+            elif x>400 and y<300:
+                self.num=1
     def get_bb(self):
         return self.x - 15, self.y - 15, self.x + 15, self.y + 15
 
@@ -109,11 +118,25 @@ class Boss:
             self.tx, self.ty = random.randint(50, 400 - 50), random.randint(50, 250)
         elif self.num==1:
             self.tx, self.ty = random.randint(440, 800 - 50), random.randint(50, 250)
+        elif self.num==5:
+            self.tx, self.ty = random.randint(60, 80), random.randint(60, 340)
+        elif self.num==6:
+            self.tx, self.ty = random.randint(700, 740), random.randint(300, 540)
+        elif self.num==7:
+            self.tx, self.ty = random.randint(180, 600), random.randint(500, 540)
         pass
 
     def is_ham_nearby(self, r):
-        if self.distance_less_than(Stage_2.hamtori.x, Stage_2.hamtori.y, self.x, self.y, r):
-            return BehaviorTree.SUCCESS
+        if self.stage==2:
+            if self.distance_less_than(Stage_2.hamtori.x, Stage_2.hamtori.y, self.x, self.y, r):
+                return BehaviorTree.SUCCESS
+            else:
+                return BehaviorTree.FAIL
+        elif self.stage==3:
+            if self.distance_less_than(Stage_3.hamtori.x, Stage_3.hamtori.y, self.x, self.y, r):
+                return BehaviorTree.SUCCESS
+            else:
+                return BehaviorTree.FAIL
         else:
             return BehaviorTree.FAIL
 
@@ -137,13 +160,26 @@ class Boss:
                 self.y = bottom-20
             elif self.y > top:
                 self.y = top+20
-
+        if group == 'boss:obstacle':
+            game_world.remove_object(self)
+            print("boss die")
 
     def move_to_ham(self, r=0.5):
         self.state = 'Walk'
-        self.move_slightly_to(Stage_2.hamtori.x, Stage_2.hamtori.y)
-        if self.distance_less_than(Stage_2.hamtori.x, Stage_2.hamtori.y, self.x, self.y, r):
-            return BehaviorTree.SUCCESS
+        if self.stage==2:
+            self.move_slightly_to(Stage_2.hamtori.x, Stage_2.hamtori.y)
+        elif self.stage==3:
+            self.move_slightly_to(Stage_3.hamtori.x, Stage_3.hamtori.y)
+        if self.stage==2:
+            if self.distance_less_than(Stage_2.hamtori.x, Stage_2.hamtori.y, self.x, self.y, r):
+                return BehaviorTree.SUCCESS
+            else:
+                return BehaviorTree.RUNNING
+        elif self.stage==3:
+            if self.distance_less_than(Stage_3.hamtori.x, Stage_3.hamtori.y, self.x, self.y, r):
+                return BehaviorTree.SUCCESS
+            else:
+                return BehaviorTree.RUNNING
         else:
             return BehaviorTree.RUNNING
 

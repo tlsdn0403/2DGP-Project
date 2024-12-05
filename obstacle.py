@@ -17,11 +17,12 @@ ACTION_PER_TIME = 1 / TIME_PER_ACTION
 FRAMES_PER_ACTION = 4
 
 class Obstacle:
-    def __init__(self, x, y):
+    def __init__(self, x, y,stage):
         self.x = x
         self.y = y
         self.image = load_image(obstacle_image.stage_1)
         self.frame=0
+        self.stage= stage
         if(self.x>400):
             self.dir=-1
         else:
@@ -41,10 +42,16 @@ class Obstacle:
     def update(self):
         self.do()
         self.x += RUN_SPEED_PPS * self.dir * game_framework.frame_time
-        if self.x > 750:
-            self.dir = -1
-        elif self.x < 60:
-            self.dir = 1
+        if self.stage==3:
+            if self.x > 600:
+                self.dir = -1
+            elif self.x < 180:
+                self.dir = 1
+        elif self.stage==1:
+            if self.x > 750:
+                self.dir = -1
+            elif self.x < 60:
+                self.dir = 1
         self.x = clamp(40, self.x, 760)
 
     def handle_collision(self, group, other):

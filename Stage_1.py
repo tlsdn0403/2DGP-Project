@@ -22,7 +22,7 @@ def handle_events():
 
 def init():
     global hamtori, background, walls
-    hamtori = Hamtori(66,66)  # 햄토리 객체 생성
+    hamtori = Hamtori(66,66,1)  # 햄토리 객체 생성
     game_world.add_object(hamtori,1)
     background = Background(1)  # 배경 객체 생성
     game_world.add_object(background,0)
@@ -67,7 +67,7 @@ def init():
     obstacle_positions.append((70,400))
     obstacle_positions.append((720,520))
 
-    obstacles = [Obstacle(x, y) for (x, y) in obstacle_positions]
+    obstacles = [Obstacle(x, y,1) for (x, y) in obstacle_positions]
     game_world.add_collision_pair('hamtori:obstacle',hamtori, None)  #햄토리를 한 번만 넣도록 만듦
     for obstacle in obstacles:
         game_world.add_object(obstacle, 1)

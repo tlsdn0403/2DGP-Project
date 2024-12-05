@@ -187,8 +187,9 @@ class RunLeftDown:
         self.ham_image.clip_draw(int(self.frame) * 37 - 3, 0, 37, 40, self.x, self.y)
 
 class Hamtori:
-    def __init__(self,x,y):
+    def __init__(self,x,y,stage):
         self.hp=3
+        self.stage=stage
         self.x, self.y = x, y  # 화면 왼아래에서 시작
         self.frame = 0
         self.dirx=0
@@ -204,8 +205,7 @@ class Hamtori:
         
         self.state_machine.set_transitions(
     {
-        Idle: {right_down: RunRight, left_down: RunLeft, left_up: RunRight, right_up: RunLeft, upkey_down: RunUp,
-                   downkey_down: RunDown, downkey_up: RunUp},
+            Idle: {right_down: RunRight, left_down: RunLeft, upkey_down: RunUp,downkey_down: RunDown},
             RunRight: {right_up: Idle, left_down: Idle, upkey_down: RunRightUp, upkey_up: RunRightDown,
                        downkey_down: RunRightDown, downkey_up: RunRightUp},
             RunRightUp: {upkey_up: RunRight, right_up: RunUp, left_down: RunUp, downkey_down: RunRight},
@@ -265,8 +265,12 @@ class Hamtori:
 
             print("Hamtori collided with a wall.")
         if group == 'hamtori:obstacle':
-            self.x = 65
-            self.y = 65
+            if self.stage==3:
+                self.x = 720    
+                self.y = 66
+            else:
+                self.x = 65
+                self.y = 65
             if self.collision_sound:
                 self.collision_sound.play()  # 충돌 효과음을 재생
             print("Hamtori collided with an obstacle, sound played.")

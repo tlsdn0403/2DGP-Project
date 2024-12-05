@@ -23,7 +23,7 @@ def handle_events():
 
 def init():
     global hamtori, background, walls
-    hamtori = Hamtori(720,70)  # 햄토리 객체 생성
+    hamtori = Hamtori(720,70,2)  # 햄토리 객체 생성
     game_world.add_object(hamtori,1)
     background = Background(2)  # 배경 객체 생성
     game_world.add_object(background,0)
@@ -72,7 +72,7 @@ def init():
     boss_positions.append((420,240))
     boss_positions.append((200,400))
     boss_positions.append((420,400))
-    Enemys=[Boss(x,y) for (x,y) in boss_positions ]
+    Enemys=[Boss(x,y,2) for (x,y) in boss_positions ]
     game_world.add_collision_pair('hamtori:boss',hamtori,None)
     for Enemy in Enemys:
         game_world.add_object(Enemy ,1)
