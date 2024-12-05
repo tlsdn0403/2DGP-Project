@@ -3,7 +3,6 @@ from Background import Background
 from Walls import Walls
 from hamtori import Hamtori
 from obstacle import Obstacle
-from boss import Boss
 import game_framework
 import game_world
 import Stage_3
@@ -22,6 +21,7 @@ def handle_events():
         
 
 def init():
+    from boss import Boss
     global hamtori, background, walls
     hamtori = Hamtori(720,70,2)  # 햄토리 객체 생성
     game_world.add_object(hamtori,1)

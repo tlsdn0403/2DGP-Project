@@ -17,9 +17,12 @@ class walls_image:
 class Backgorund_image:
     stage_1 = 'ham_background.jpg'
     stage_2 = 'ham_background_2.jpg'
+    stage_5= 'Ending.png'
 
 class obstacle_image:
     stage_1= 'stone_2.png'
 
 class boss_image:
     stage_2 ='boss.png'
+class bijou_image:
+    stage_4='bijou.png'

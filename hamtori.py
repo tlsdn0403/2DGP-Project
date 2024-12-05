@@ -263,7 +263,7 @@ class Hamtori:
                 print("collid")
 
 
-            print("Hamtori collided with a wall.")
+            #print("Hamtori collided with a wall.")
         if group == 'hamtori:obstacle':
             if self.stage==3:
                 self.x = 720    
@@ -273,12 +273,12 @@ class Hamtori:
                 self.y = 65
             if self.collision_sound:
                 self.collision_sound.play()  # 충돌 효과음을 재생
-            print("Hamtori collided with an obstacle, sound played.")
+            #print("Hamtori collided with an obstacle, sound played.")
 
         if group == 'hamtori:boss':
             self.x = 720
             self.y = 65
             if self.collision_sound:
                 self.collision_sound.play()  # 충돌 효과음을 재생
-            print("Hamtori collided with a boss.")
+            #print("Hamtori collided with a boss.")
         

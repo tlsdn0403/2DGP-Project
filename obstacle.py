@@ -57,7 +57,8 @@ class Obstacle:
     def handle_collision(self, group, other):
         # fill here
         if group == 'hamtori:obstacle':
-            print("collid")
+            pass
+            #print("collid")
         pass
 
 

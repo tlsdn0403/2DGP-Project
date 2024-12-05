@@ -5,13 +5,13 @@ collision_pairs={}#빈 딕셔너리
 
 def add_collision_pair(group,a,b):
     if group not in collision_pairs:
-        print(f'NEW group {group} added......')
+        #print(f'NEW group {group} added......')
         collision_pairs[group]=[ [] , [] ]
     if a:
-        print(f'group {group} : {a} added......')
+        #print(f'group {group} : {a} added......')
         collision_pairs[group][0].append(a)
     if b:
-        print(f'group {group} : {b} added......')
+        #print(f'group {group} : {b} added......')
         collision_pairs[group][1].append(b)
 
 
@@ -72,7 +72,7 @@ def handle_collisions():
         for a in pairs[0]:
             for b in pairs[1]:
                 if collide(a,b):
-                    print(f'{group} collide')
+                    #print(f'{group} collide')
                     a.handle_collision(group,b)
                     b.handle_collision(group,a)
     return None 

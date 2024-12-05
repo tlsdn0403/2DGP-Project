@@ -17,7 +17,21 @@ class Background:
             self.bgm= load_music('ham_bgm_2.mp3')
             self.bgm.set_volume(32)
             self.bgm.repeat_play()     
-        
+        elif self.stage==3:
+            self.background_image= load_image(Backgorund_image.stage_2)
+            self.bgm= load_music('ham_bgm_3.mp3')
+            self.bgm.set_volume(32)
+            self.bgm.repeat_play()   
+        elif self.stage==4:
+            self.background_image = load_image(Backgorund_image.stage_1)
+            self.bgm= load_music('ham_bgm_4.mp3')
+            self.bgm.set_volume(32)
+            self.bgm.repeat_play()
+        elif self.stage==5:
+            self.background_image = load_image(Backgorund_image.stage_5)
+            self.bgm= load_music('ham_finish.mp3')
+            self.bgm.set_volume(32)
+            self.bgm.repeat_play()
     def draw(self):
         self.background_image.draw(self.x, self.y, 800, 600)  # 배경을 화면에 그림
 

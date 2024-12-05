@@ -5,7 +5,7 @@ from hamtori import Hamtori
 from obstacle import Obstacle
 import game_framework
 import game_world
-import Stage_1
+import Stage_4
 
 def handle_events():
     events = get_events()
@@ -15,7 +15,7 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.quit()
         elif hamtori.x<=0 and hamtori.y>=500:
-            game_framework.change_mode(Stage_1) 
+            game_framework.change_mode(Stage_4) 
         else:
             hamtori.handle_event(event)
         
@@ -25,7 +25,7 @@ def init():
     global hamtori, background, walls
     hamtori = Hamtori(720,65,3)  # 햄토리 객체 생성
     game_world.add_object(hamtori,1)
-    background = Background(2)  # 배경 객체 생성
+    background = Background(3)  # 배경 객체 생성
     game_world.add_object(background,0)
     
 
@@ -102,6 +102,7 @@ def init():
 
 def finish():
     game_world.clear()
+    game_world.clear_collision_pairs()
     pass
 
 def update():
