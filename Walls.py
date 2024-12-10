@@ -35,5 +35,6 @@ class Walls:
     def handle_collision(self, group, other):
         # fill here
         if group == 'hamtori:wall':
-            print("collid")
+            #print("collid")
+            pass
         pass

@@ -260,7 +260,7 @@ class Hamtori:
             else:
                 self.x -= math.cos(self.dir) * RUN_SPEED_PPS * game_framework.frame_time
                 self.y -= math.sin(self.dir) * RUN_SPEED_PPS * game_framework.frame_time
-                print("collid")
+                #print("collid")
 
 
             #print("Hamtori collided with a wall.")
